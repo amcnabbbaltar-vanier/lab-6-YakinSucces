@@ -7,14 +7,15 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
-    private int score = 0;
+    public int score = 0;
     public int targetScore = 4;
+    public Text scoreText;
 
 
     private void Awake()
     {
         // Enforce one instance
-        if (Instance != null)
+        if (Instance == null)
         {
            Instance = this;
            DontDestroyOnLoad(gameObject);
@@ -34,6 +35,13 @@ public class GameManager : MonoBehaviour
     }
 
 
+
+    public void IncrementScore()
+    {
+        score ++;
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
         if (scoreText != null)
@@ -44,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        MainMenu.LoadScene(MainMenu.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
 
